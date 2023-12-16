@@ -36,9 +36,38 @@
                     <view key="view" contentMode="scaleToFill" id="1fS-Qv-1Do">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="n9r-eX-dd8">
+                                <rect key="frame" x="10" y="69" width="373" height="739"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ff2-MB-JO4">
+                                        <rect key="frame" x="166" y="0.0" width="41.333333333333343" height="165.66666666666666"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nZw-Xv-92M">
+                                        <rect key="frame" x="166" y="215.66666666666669" width="41.333333333333343" height="523.33333333333326"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="KlR-Sq-v5K"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="KlR-Sq-v5K" firstAttribute="trailing" secondItem="n9r-eX-dd8" secondAttribute="trailing" constant="10" id="KAV-BE-v6k"/>
+                            <constraint firstItem="n9r-eX-dd8" firstAttribute="leading" secondItem="KlR-Sq-v5K" secondAttribute="leading" constant="10" id="L5D-eJ-lMa"/>
+                            <constraint firstItem="KlR-Sq-v5K" firstAttribute="bottom" secondItem="n9r-eX-dd8" secondAttribute="bottom" constant="10" id="hSL-oS-6dj"/>
+                            <constraint firstItem="n9r-eX-dd8" firstAttribute="top" secondItem="KlR-Sq-v5K" secondAttribute="top" constant="10" id="mxI-S5-r0a"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="describtionLabelOutlet" destination="nZw-Xv-92M" id="Jj8-oz-PCf"/>
+                        <outlet property="taskLabelOutlet" destination="ff2-MB-JO4" id="mbs-Fv-Vs1"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bfZ-ff-SPM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
