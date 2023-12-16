@@ -9,8 +9,10 @@ import UIKit
 
 class FirstTableViewController: UITableViewController {
 
+    //MARK: - properties
     var tasks = [Task]()
     
+    //MARK: - View life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
      
@@ -22,6 +24,10 @@ class FirstTableViewController: UITableViewController {
         tableView.register(nibTaskCell, forCellReuseIdentifier: "TaskCell")
     }
 
+}
+
+//MARK: - TableViewDelegate and TableVIewDataSource
+extension FirstTableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         tasks.count
     }
@@ -37,6 +43,13 @@ class FirstTableViewController: UITableViewController {
         return cell
     }
     
-
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(identifier: "TaskInformationViewController")
+        
+        vc.view.backgroundColor = .gray
+        
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
 }
-
