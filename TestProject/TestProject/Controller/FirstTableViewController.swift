@@ -23,7 +23,14 @@ class FirstTableViewController: UITableViewController {
         let nibTaskCell = UINib(nibName: "TaskTableViewCell", bundle: nil)
         tableView.register(nibTaskCell, forCellReuseIdentifier: "TaskCell")
     }
-
+    
+    //MARK: - @IBActions
+    @IBAction func AddTaskButtonAction(_ sender: UIBarButtonItem) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(identifier: "AddEditTableViewController") as! AddEditTableViewController
+        let navigationController = UINavigationController(rootViewController: vc)
+        self.navigationController?.present(navigationController, animated: true)
+    }
 }
 
 //MARK: - TableViewDelegate and TableVIewDataSource

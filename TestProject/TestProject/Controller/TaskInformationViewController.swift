@@ -27,4 +27,14 @@ class TaskInformationViewController: UIViewController {
         describtionLabelOutlet.text = task?.describtion
     }
     
+    //MARK: - @IBActions
+    
+    @IBAction func editTaskButtonAction(_ sender: UIBarButtonItem) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "AddEditTableViewController") as! AddEditTableViewController
+        let navigationController = UINavigationController(rootViewController: vc)
+        vc.task = task
+        self.navigationController?.present(navigationController, animated: true)
+    }
+    
 }
