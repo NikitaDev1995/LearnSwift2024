@@ -8,11 +8,9 @@
 import UIKit
 
 class TaskTableViewCell: UITableViewCell {
-
-
+    //MARK: - @IBOutlets
     @IBOutlet weak var taskLabelOutlet: UILabel!
-    
     @IBOutlet weak var descriptionLabelOutlet: UILabel!
-    
     @IBOutlet weak var isActiveSwitchOutlet: UISwitch!
+    
 }

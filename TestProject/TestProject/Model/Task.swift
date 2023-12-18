@@ -7,7 +7,8 @@
 
 import Foundation
 
-struct Task {
+struct Task: Comparable {
+    
     var task: String
     var describtion: String
     var isActive: Bool
@@ -17,5 +18,9 @@ struct Task {
         Task(task: "Поставить будильник на работу", describtion: "Будильник служит для того чтобы не проспать на работу", isActive: true),
         Task(task: "Сходить вечером выпить в баре", describtion: "Лучше буду сидеть программировать", isActive: false)]
         return tasks
+    }
+    
+    static func < (lhs: Task, rhs: Task) -> Bool {
+        return lhs.task > rhs.task
     }
 }

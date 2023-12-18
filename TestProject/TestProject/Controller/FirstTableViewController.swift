@@ -7,10 +7,22 @@
 
 import UIKit
 
+protocol AddEditTaskViewControllerDelegate: AnyObject {
+    func addTask(_ viewController: FirstTableViewController, with task: Task)
+}
+
+protocol TaskInformationViewControllerDelegate: AnyObject {
+    func changeTask(_ viewController: FirstTableViewController, with task: Task)
+}
+
 class FirstTableViewController: UITableViewController {
 
     //MARK: - properties
-    var tasks = [Task]()
+    var tasks = [Task]() {
+        didSet {
+            tasks.sort(by: >)
+        }
+    }
     
     //MARK: - View life cycle
     override func viewDidLoad() {
@@ -26,9 +38,11 @@ class FirstTableViewController: UITableViewController {
     
     //MARK: - @IBActions
     @IBAction func AddTaskButtonAction(_ sender: UIBarButtonItem) {
+        
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(identifier: "AddEditTableViewController") as! AddEditTableViewController
-        let navigationController = UINavigationController(rootViewController: vc)
+        let addEditTaskVC = storyboard.instantiateViewController(identifier: "AddEditTableViewController") as! AddEditTableViewController
+        let navigationController = UINavigationController(rootViewController: addEditTaskVC)
+        addEditTaskVC.firstTableVCDelegate = self
         self.navigationController?.present(navigationController, animated: true)
     }
 }
@@ -53,11 +67,27 @@ extension FirstTableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(identifier: "TaskInformationViewController") as! TaskInformationViewController
+        let taskInformationVC = storyboard.instantiateViewController(identifier: "TaskInformationViewController") as! TaskInformationViewController
+        taskInformationVC.firstTableVCDelegate = self
         
         let task = tasks[indexPath.row]
-        vc.task = task
+        taskInformationVC.task = task
         
-        self.navigationController?.pushViewController(vc, animated: true)
+        tasks.remove(at: indexPath.row)
+        self.navigationController?.pushViewController(taskInformationVC, animated: true)
+    }
+}
+
+extension FirstTableViewController: AddEditTaskViewControllerDelegate, TaskInformationViewControllerDelegate {
+    
+    //MARK: - Methods
+    func addTask(_ viewController: FirstTableViewController, with task: Task) {
+        tasks.append(task)
+        tableView.reloadData()
+    }
+
+    func changeTask(_ viewController: FirstTableViewController, with task: Task) {
+        tasks.append(task)
+        tableView.reloadData()
     }
 }
