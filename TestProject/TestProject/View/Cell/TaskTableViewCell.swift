@@ -13,4 +13,9 @@ class TaskTableViewCell: UITableViewCell {
     @IBOutlet weak var descriptionLabelOutlet: UILabel!
     @IBOutlet weak var isActiveSwitchOutlet: UISwitch!
     
+    
+    @IBAction func isActiveSwitchAction(_ sender: UISwitch) {
+        
+    }
+    
 }
