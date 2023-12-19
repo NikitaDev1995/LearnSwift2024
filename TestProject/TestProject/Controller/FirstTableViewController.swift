@@ -38,7 +38,6 @@ class FirstTableViewController: UITableViewController {
     
     //MARK: - @IBActions
     @IBAction func AddTaskButtonAction(_ sender: UIBarButtonItem) {
-        
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let addEditTaskVC = storyboard.instantiateViewController(identifier: "AddEditTableViewController") as! AddEditTableViewController
         let navigationController = UINavigationController(rootViewController: addEditTaskVC)
@@ -61,11 +60,12 @@ extension FirstTableViewController {
         cell.descriptionLabelOutlet.text = "\(task.describtion)"
         cell.isActiveSwitchOutlet.isOn = task.isActive
         
+        cell.delegate = self
+        
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let taskInformationVC = storyboard.instantiateViewController(identifier: "TaskInformationViewController") as! TaskInformationViewController
         taskInformationVC.firstTableVCDelegate = self
@@ -78,7 +78,7 @@ extension FirstTableViewController {
     }
 }
 
-extension FirstTableViewController: AddEditTaskViewControllerDelegate, TaskInformationViewControllerDelegate {
+extension FirstTableViewController: AddEditTaskViewControllerDelegate, TaskInformationViewControllerDelegate, TaskTableViewCellDelegate {
     
     //MARK: - Methods
     func addTask(_ viewController: FirstTableViewController, with task: Task) {
@@ -89,5 +89,11 @@ extension FirstTableViewController: AddEditTaskViewControllerDelegate, TaskInfor
     func changeTask(_ viewController: FirstTableViewController, with task: Task) {
         tasks.append(task)
         tableView.reloadData()
+    }
+    
+    func didChangeActivity(_ cell: TaskTableViewCell, isActive: Bool) {
+        if let indexPath = tableView.indexPath(for: cell) {
+            tasks[indexPath.row].isActive = isActive
+        }
     }
 }

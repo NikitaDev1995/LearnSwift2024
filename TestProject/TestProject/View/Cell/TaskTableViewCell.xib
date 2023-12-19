@@ -18,6 +18,9 @@
                 <subviews>
                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="E4i-MN-NB7">
                         <rect key="frame" x="234.66666666666663" y="26.666666666666671" width="51" height="31"/>
+                        <connections>
+                            <action selector="isActiveSwitchAction:" destination="KGk-i7-Jjw" eventType="valueChanged" id="nSa-PX-Mxs"/>
+                        </connections>
                     </switch>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="MFz-LV-Bvs">
                         <rect key="frame" x="10" y="5" width="214.66666666666666" height="74"/>
