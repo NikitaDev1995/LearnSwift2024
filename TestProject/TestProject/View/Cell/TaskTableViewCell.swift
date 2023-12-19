@@ -7,15 +7,22 @@
 
 import UIKit
 
+protocol TaskTableViewCellDelegate: AnyObject {
+    func didChangeActivity(_ cell: TaskTableViewCell, isActive: Bool)
+}
+
 class TaskTableViewCell: UITableViewCell {
     //MARK: - @IBOutlets
     @IBOutlet weak var taskLabelOutlet: UILabel!
     @IBOutlet weak var descriptionLabelOutlet: UILabel!
     @IBOutlet weak var isActiveSwitchOutlet: UISwitch!
     
+    //MARK: - Properties
+    weak var delegate: TaskTableViewCellDelegate?
     
+    //MARK: - @IBActions
     @IBAction func isActiveSwitchAction(_ sender: UISwitch) {
-        
+        delegate?.didChangeActivity(self, isActive: sender.isOn)
     }
     
 }
