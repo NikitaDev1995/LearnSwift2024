@@ -29,7 +29,7 @@ class FirstTableViewController: UITableViewController {
         super.viewDidLoad()
      
         if tasks.isEmpty {
-            tasks = Task.initialTasks()
+            tasks = Task.loadTask()
         }
         
         let nibTaskCell = UINib(nibName: "TaskTableViewCell", bundle: nil)
@@ -83,17 +83,20 @@ extension FirstTableViewController: AddEditTaskViewControllerDelegate, TaskInfor
     //MARK: - Methods
     func addTask(_ viewController: FirstTableViewController, with task: Task) {
         tasks.append(task)
+        Task.saveTask(tasks)
         tableView.reloadData()
     }
 
     func changeTask(_ viewController: FirstTableViewController, with task: Task) {
         tasks.append(task)
+        Task.saveTask(tasks)
         tableView.reloadData()
     }
     
     func didChangeActivity(_ cell: TaskTableViewCell, isActive: Bool) {
         if let indexPath = tableView.indexPath(for: cell) {
             tasks[indexPath.row].isActive = isActive
+            Task.saveTask(tasks)
         }
     }
 }
