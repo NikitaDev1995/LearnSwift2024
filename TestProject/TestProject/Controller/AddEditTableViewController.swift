@@ -25,6 +25,13 @@ class AddEditTableViewController: UITableViewController {
             taskTextFieldOutlet.text = task.task
             taskDescribtionTextViewOutlet.text = task.describtion
         }
+        
+        configureAddEditTaskVC()
+    }
+    
+    private func configureAddEditTaskVC() {
+        taskDescribtionTextViewOutlet.layer.borderWidth = 2
+        taskDescribtionTextViewOutlet.layer.borderColor = UIColor.gray.cgColor
     }
     
     //MARK: - @IBActions

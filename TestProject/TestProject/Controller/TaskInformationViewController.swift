@@ -27,6 +27,8 @@ class TaskInformationViewController: UIViewController, AddEditTaskVCDelegate {
 
         taskLabelOutlet.text = task?.task
         describtionLabelOutlet.text = task?.describtion
+        
+        configureTaskInformationVC()
     }
     
     //MARK: - Methods
@@ -34,6 +36,13 @@ class TaskInformationViewController: UIViewController, AddEditTaskVCDelegate {
         self.task = task
         taskLabelOutlet.text = task.task
         describtionLabelOutlet.text = task.describtion
+    }
+    
+    private func configureTaskInformationVC() {
+        [taskLabelOutlet, describtionLabelOutlet].forEach { labelOutlet in
+            labelOutlet?.layer.borderWidth = 2
+            labelOutlet?.layer.borderColor = UIColor.gray.cgColor
+        }
     }
     
     //MARK: - @IBActions
