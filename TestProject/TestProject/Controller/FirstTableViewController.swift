@@ -29,7 +29,7 @@ class FirstTableViewController: UITableViewController {
         super.viewDidLoad()
      
         if tasks.isEmpty {
-            tasks = Task.initialTasks()
+            tasks = Task.loadTask()
         }
         
         let nibTaskCell = UINib(nibName: "TaskTableViewCell", bundle: nil)
@@ -56,10 +56,7 @@ extension FirstTableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath) as! TaskTableViewCell
         
         let task = tasks[indexPath.row]
-        cell.taskLabelOutlet.text = "\(task.task)"
-        cell.descriptionLabelOutlet.text = "\(task.describtion)"
-        cell.isActiveSwitchOutlet.isOn = task.isActive
-        
+        cell.configureCell(task)
         cell.delegate = self
         
         return cell
@@ -83,17 +80,20 @@ extension FirstTableViewController: AddEditTaskViewControllerDelegate, TaskInfor
     //MARK: - Methods
     func addTask(_ viewController: FirstTableViewController, with task: Task) {
         tasks.append(task)
+        Task.saveTask(tasks)
         tableView.reloadData()
     }
 
     func changeTask(_ viewController: FirstTableViewController, with task: Task) {
         tasks.append(task)
+        Task.saveTask(tasks)
         tableView.reloadData()
     }
     
     func didChangeActivity(_ cell: TaskTableViewCell, isActive: Bool) {
         if let indexPath = tableView.indexPath(for: cell) {
             tasks[indexPath.row].isActive = isActive
+            Task.saveTask(tasks)
         }
     }
 }

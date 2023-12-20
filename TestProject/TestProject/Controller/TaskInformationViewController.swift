@@ -65,5 +65,4 @@ class TaskInformationViewController: UIViewController, AddEditTaskVCDelegate {
         }
         self.navigationController?.popViewController(animated: true)
     }
-    
 }

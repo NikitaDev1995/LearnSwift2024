@@ -20,6 +20,13 @@ class TaskTableViewCell: UITableViewCell {
     //MARK: - Properties
     weak var delegate: TaskTableViewCellDelegate?
     
+    //MARK: - Methods
+    func configureCell(_ task: Task) {
+        taskLabelOutlet.text = task.task
+        descriptionLabelOutlet.text = task.describtion
+        isActiveSwitchOutlet.isOn = task.isActive
+    }
+    
     //MARK: - @IBActions
     @IBAction func isActiveSwitchAction(_ sender: UISwitch) {
         delegate?.didChangeActivity(self, isActive: sender.isOn)
