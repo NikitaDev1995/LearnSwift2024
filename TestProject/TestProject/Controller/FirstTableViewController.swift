@@ -21,6 +21,7 @@ class FirstTableViewController: UITableViewController {
     var tasks = [Task]() {
         didSet {
             tasks.sort(by: >)
+            Task.saveTask(tasks)
         }
     }
     
@@ -42,6 +43,7 @@ class FirstTableViewController: UITableViewController {
         let addEditTaskVC = storyboard.instantiateViewController(identifier: "AddEditTableViewController") as! AddEditTableViewController
         let navigationController = UINavigationController(rootViewController: addEditTaskVC)
         addEditTaskVC.firstTableVCDelegate = self
+        
         self.navigationController?.present(navigationController, animated: true)
     }
 }
@@ -73,6 +75,16 @@ extension FirstTableViewController {
         tasks.remove(at: indexPath.row)
         self.navigationController?.pushViewController(taskInformationVC, animated: true)
     }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            
+            tableView.beginUpdates()
+            tasks.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+            tableView.endUpdates()
+        }
+    }
 }
 
 extension FirstTableViewController: AddEditTaskViewControllerDelegate, TaskInformationViewControllerDelegate, TaskTableViewCellDelegate {
@@ -80,20 +92,17 @@ extension FirstTableViewController: AddEditTaskViewControllerDelegate, TaskInfor
     //MARK: - Methods
     func addTask(_ viewController: FirstTableViewController, with task: Task) {
         tasks.append(task)
-        Task.saveTask(tasks)
         tableView.reloadData()
     }
 
     func changeTask(_ viewController: FirstTableViewController, with task: Task) {
         tasks.append(task)
-        Task.saveTask(tasks)
         tableView.reloadData()
     }
     
     func didChangeActivity(_ cell: TaskTableViewCell, isActive: Bool) {
         if let indexPath = tableView.indexPath(for: cell) {
             tasks[indexPath.row].isActive = isActive
-            Task.saveTask(tasks)
         }
     }
 }
